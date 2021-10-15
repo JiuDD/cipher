@@ -1,5 +1,8 @@
 package com.ajiu.test.sm4;
 
+import cn.hutool.core.util.CharsetUtil;
+import cn.hutool.crypto.SmUtil;
+import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.Cipher;
@@ -159,6 +162,28 @@ public class Sm4Utils {
             String hexString = ByteUtils.printHexString(key.getBytes());
             String white = Sm4Utils.decryptEcb(hexString, response, ENCODING);
             System.out.println(white);
+
+            /* 使用 hutool 封装好的SM4工具类加解密：方法1，不指定密钥 */
+            SymmetricCrypto sm4 = SmUtil.sm4();
+            //加密
+            String encryptHex = sm4.encryptHex(json);
+            System.out.println("加密后的密文 不指定密钥：" + encryptHex);
+            //解密
+            String decryptStr = sm4.decryptStr(encryptHex, CharsetUtil.CHARSET_UTF_8);
+            System.out.println("解密后的明文 不指定密钥：" + decryptStr);
+
+            /* 使用 hutool 封装好的SM4工具类加解密：方法2，自定义密钥。效果，跟自己封装的Sm4Utils工具类是一样的，所以，还是使用这种方式，直接在其它项目引入jar hutool-all 即可*/
+            json = "年薪100万";
+            // key必须是16位
+            String sm4Key = "1234567812345678";//自定义密钥
+            SymmetricCrypto sm4Crypto = SmUtil.sm4(sm4Key.getBytes());
+            encryptHex = sm4Crypto.encryptHex(json);//加密
+            System.out.println("加密后的密文 自定义密钥：" + encryptHex);
+            decryptStr = sm4Crypto.decryptStr(encryptHex, CharsetUtil.CHARSET_UTF_8);
+            System.out.println("解密后的明文 自定义密钥：" + decryptStr);
+
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
