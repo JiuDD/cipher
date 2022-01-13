@@ -7,7 +7,7 @@
   <groupId>com.ajiu.test</groupId>
   <artifactId>cipher</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
 
   <name>加密算法</name>
   <!-- FIXME change it to the project's website -->

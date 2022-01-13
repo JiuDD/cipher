@@ -10,6 +10,7 @@ import java.security.spec.KeySpec;
 
 /**
  * description: DES对称加密、解密
+ *  这个是自己实现的 加密类，  DESDemo 是使用HuTool提供的加密类
  * @author: JiuDongDong
  * date: 2018/7/20.
  */
