@@ -29,6 +29,9 @@ public class DESDemo {
         /******************************************  使用指定密钥   ***********************************/
         //随机生成密钥
         byte[] key2 = SecureUtil.generateKey(SymmetricAlgorithm.DES.getValue()).getEncoded();
+        //如果指定密钥 123456，则：***********************************************************************
+        //key2 = "123456".getBytes();
+
         //构建
         DES des2 = SecureUtil.des(key2);
         //加密
